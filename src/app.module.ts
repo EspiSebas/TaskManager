@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TaskManagerModule } from './task-manager/task-manager.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectModule } from './project/project.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -18,7 +20,9 @@ import { ProjectModule } from './project/project.module';
       synchronize: true,
     }),
     ProjectModule,
-    TaskManagerModule
+    TaskManagerModule,
+    UsersModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
