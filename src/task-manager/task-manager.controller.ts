@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TaskManagerService } from './task-manager.service';
 import { CreateTaskManagerDto } from './dto/create-task-manager.dto';
 import { UpdateTaskManagerDto } from './dto/update-task-manager.dto';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('TaskManager')
 @Controller('task-manager')
 export class TaskManagerController {
   constructor(private readonly taskManagerService: TaskManagerService) {}
@@ -13,6 +15,8 @@ export class TaskManagerController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get all task' })
+  @ApiResponse({ status: 200, description: 'List of task returned successfully.' })
   findAll() {
     return this.taskManagerService.findAll();
   }
