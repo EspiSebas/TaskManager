@@ -29,7 +29,7 @@ export class AuthService {
 
 
     async login(loginUserDto:LoginUserDto) {
-        const user = await this.userService.findOneByEmail(loginUserDto.email)
+        const user = await this.userService.findOneByEmailWithPassword(loginUserDto.email)
         if(!user){
             throw new UnauthorizedException('Email is wrong');
         }
@@ -39,7 +39,7 @@ export class AuthService {
             throw new UnauthorizedException('Password is wrong')
         }
 
-        const payload = { emai: user.email}
+        const payload = { emai: user.email ,role: user.role}
 
         const token = await this.jwtService.signAsync(payload);
         return `Welcome : ${user.name} and your token is ${token}`;
