@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateTaskManagerDto } from './create-task-manager.dto';
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { TaskState } from '../entities/states.enum';
+import { Status } from '../../common/states.enum';
 
 export class UpdateTaskManagerDto {
         @IsString()
@@ -15,7 +15,7 @@ export class UpdateTaskManagerDto {
         description:string;
     
         @IsOptional()
-        state?: TaskState;
+        state?: Status;
 
         @IsOptional()
         comment?: string

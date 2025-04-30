@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { TaskState } from "../entities/states.enum";
+import { Status } from "../../common/states.enum";
 
 export class CreateTaskManagerDto {
     @IsString()
@@ -11,8 +11,18 @@ export class CreateTaskManagerDto {
     description:string;
 
     @IsOptional()
-    state?: TaskState
+    state?: Status;
 
     @IsOptional()
-    comment?: string
+    comment?: string;
+
+    @IsString()
+    project: string;
+
+    /*@IsString()
+    user: string;
+    */
+   
+    @IsString()
+    dev: string;
 }

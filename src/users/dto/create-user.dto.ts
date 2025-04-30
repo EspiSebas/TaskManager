@@ -1,4 +1,5 @@
-import { IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
+import { Roles } from "src/common/roles";
 
 export class CreateUserDto {
     @IsString()
@@ -11,7 +12,8 @@ export class CreateUserDto {
     password: string;
 
     @IsString()
-    rol:string;
+    @IsOptional()
+    role:Roles;
 
     
 

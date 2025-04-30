@@ -2,7 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { Roles } from 'src/common/roles';
+import { Auth } from 'src/auth/decorator/auth.decorator';
 
+@Auth(Roles.ADMIN)
 @Controller('project')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}

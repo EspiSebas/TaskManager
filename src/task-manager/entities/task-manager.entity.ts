@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, OneToOne } from "typeorm";
-import  { TaskState } from "./states.enum"
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
+import  { Status } from "../../common/states.enum"
 import { Project } from "src/project/entities/project.entity";
+import { User } from "src/users/entities/user.entity";
 
 @Entity()
 export class TaskManager {
@@ -16,11 +17,11 @@ export class TaskManager {
 
     @Column({
         type:"enum",
-        enum: TaskState,
-        default:TaskState.PENDING
+        enum: Status,
+        default:Status.PENDING
     })
     
-    state: TaskState;
+    state: Status;
 
 
     @Column({ nullable: true })
@@ -28,5 +29,10 @@ export class TaskManager {
 
     @ManyToOne( () => Project, (project) => project.taskManager, { nullable:true } )
     project : Project;
+
+    
+    @ManyToOne( ()=> User)
+    @JoinColumn({ name: 'userId' })
+    dev: User;
     
 }
