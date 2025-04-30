@@ -4,6 +4,7 @@ import { RegisterUserDto } from './dto/register.dto';
 import { LoginUserDto } from './dto/login.dto';
 import * as bcryptjs from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
+import { Roles } from 'src/common/roles';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +23,7 @@ export class AuthService {
           name, 
           email, 
           password: await bcryptjs.hash(password,12),
-          rol:"developer"
+          role:Roles.DEVELOPER
       });
 
     }
@@ -39,9 +40,14 @@ export class AuthService {
             throw new UnauthorizedException('Password is wrong')
         }
 
-        const payload = { emai: user.email ,role: user.role}
+        const payload = { email: user.email ,role: user.role, id:user.id}
 
         const token = await this.jwtService.signAsync(payload);
         return `Welcome : ${user.name} and your token is ${token}`;
+    }
+
+
+    async getProfile(user){
+        return await this.userService.findOneByEmail(user.emai);
     }
 }

@@ -1,3 +1,4 @@
+import { Roles } from "src/common/roles";
 import { Collection, Column, DeleteDateColumn, Entity } from "typeorm";
 
 @Entity()
@@ -15,10 +16,12 @@ export class User {
     @Column({nullable:false , select: false})
     password: string;
 
-    @Column({ default: "developer"})
+    @Column({ type: 'enum', default: Roles.DEVELOPER , enum: Roles})
     role: string;
 
     @DeleteDateColumn()
     deletedAt: Date;
+
+    
 
 }

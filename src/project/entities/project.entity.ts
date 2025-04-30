@@ -1,3 +1,4 @@
+import { Status } from "src/common/states.enum";
 import { TaskManager } from "src/task-manager/entities/task-manager.entity";
 import { Column, Entity, OneToMany } from "typeorm";
 
@@ -11,8 +12,16 @@ export class Project {
     name: string;
 
     @OneToMany(() => TaskManager , (taskManager) => taskManager.project , {
-        eager:true
+        eager:false 
     }) 
 
     taskManager:TaskManager[];
+
+    @Column({
+        type:"enum",
+        enum: Status,
+        default:Status.PENDING
+    })
+    
+    status: Status;
 }
