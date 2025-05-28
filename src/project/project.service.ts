@@ -33,7 +33,7 @@ export class ProjectService {
   }
 
   async findAll() {
-    return await this.projectRepository.find();
+    return await this.projectRepository.find({relations: ['taskManager']});
   }
 
   findOne(id: number) {

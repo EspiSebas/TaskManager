@@ -12,7 +12,6 @@ import { ActiveUser } from 'src/common/decorator/active-user.decorator';
 export class TaskManagerController {
   constructor(private readonly taskManagerService: TaskManagerService) {}
 
-  @Auth(Roles.ADMIN)
   @Post()
   create(@Body() createTaskManagerDto: CreateTaskManagerDto, @ActiveUser() user) {
     return this.taskManagerService.create(createTaskManagerDto, user);
@@ -31,13 +30,13 @@ export class TaskManagerController {
   }
   
 
-  @Auth(Roles.DEVELOPER)
+ 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTaskManagerDto: UpdateTaskManagerDto) {
     return this.taskManagerService.update(+id, updateTaskManagerDto);
   }
 
-  @Auth(Roles.ADMIN)
+  
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.taskManagerService.remove(+id);

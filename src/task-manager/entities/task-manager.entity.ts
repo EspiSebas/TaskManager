@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import  { Status } from "../../common/states.enum"
 import { Project } from "src/project/entities/project.entity";
 import { User } from "src/users/entities/user.entity";
@@ -35,4 +35,6 @@ export class TaskManager {
     @JoinColumn({ name: 'userId' })
     dev: User;
     
+    @DeleteDateColumn({ nullable: true })
+    deletedAt?: Date;
 }

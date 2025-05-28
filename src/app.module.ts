@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProjectModule } from './project/project.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 
@@ -22,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
     ProjectModule,
     TaskManagerModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    DashboardModule
   ],
   controllers: [],
   providers: [],

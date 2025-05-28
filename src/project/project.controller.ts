@@ -5,7 +5,6 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 import { Roles } from 'src/common/roles';
 import { Auth } from 'src/auth/decorator/auth.decorator';
 
-@Auth(Roles.ADMIN)
 @Controller('project')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
