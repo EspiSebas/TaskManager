@@ -38,6 +38,7 @@ export class TaskManagerController {
 
   
   @Delete(':id')
+  @Auth(Roles.DEVELOPER)
   remove(@Param('id') id: string) {
     return this.taskManagerService.remove(+id);
   }

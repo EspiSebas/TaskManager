@@ -12,7 +12,7 @@ export class UpdateProjectDto extends PartialType(CreateProjectDto) {
 
     @IsString()
     @IsOptional()
-    taskManager?: string;
+    taskManager?: string[];
 
     @IsOptional()
     state?: Status;

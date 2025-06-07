@@ -1,6 +1,6 @@
 import { Status } from "src/common/states.enum";
 import { TaskManager } from "src/task-manager/entities/task-manager.entity";
-import { Column, Entity, OneToMany } from "typeorm";
+import { Column, DeleteDateColumn, Entity, OneToMany } from "typeorm";
 
 @Entity()
 export class Project {
@@ -24,4 +24,9 @@ export class Project {
     })
     
     status: Status;
+
+
+    @DeleteDateColumn({ nullable: true })
+    deletedAt?: Date;
 }
+

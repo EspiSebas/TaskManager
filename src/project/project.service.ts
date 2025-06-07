@@ -3,7 +3,7 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './entities/project.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { TaskManager } from 'src/task-manager/entities/task-manager.entity';
 
 @Injectable()
@@ -20,16 +20,31 @@ export class ProjectService {
 
     
 
+  async create(createProjectDto: CreateProjectDto): Promise<Project> {
+    let tareas: TaskManager[] = [];
 
-  async create(createProjectDto: CreateProjectDto) {
-    const taskManager = await this.taskRepository.findBy({ name: createProjectDto.taskManager});
-    if(!taskManager){
-      throw new BadRequestException('Task Not Found !!');
+    if (createProjectDto.taskManager && createProjectDto.taskManager.length > 0) {
+      tareas = await this.taskRepository.find({
+        where: { name: In(createProjectDto.taskManager) },
+        relations: ['project'],
+      });
+
+      if (tareas.length !== createProjectDto.taskManager.length) {
+        throw new BadRequestException('No se encontraron todas las tareas.');
+      }
+
+      const tareasAsignadas = tareas.filter(t => t.project);
+      if (tareasAsignadas.length > 0) {
+        throw new BadRequestException('Una o más tareas ya están asignadas a un proyecto.');
+      }
     }
-    return await this.projectRepository.save({
-      ...createProjectDto,
-      taskManager
+
+    const proyecto = this.projectRepository.create({
+      name: createProjectDto.name,
+      taskManager: tareas,
     });
+
+    return await this.projectRepository.save(proyecto);
   }
 
   async findAll() {

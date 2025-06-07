@@ -43,11 +43,11 @@ export class AuthService {
         const payload = { email: user.email ,role: user.role, id:user.id}
 
         const token = await this.jwtService.signAsync(payload);
-        return `Welcome : ${user.name} and your token is ${token}`;
+        return token;
     }
 
 
     async getProfile(user){
-        return await this.userService.findOneByEmail(user.emai);
+        return await this.userService.findOneByEmail(user.email);
     }
 }
