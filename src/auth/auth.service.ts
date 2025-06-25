@@ -50,4 +50,9 @@ export class AuthService {
     async getProfile(user){
         return await this.userService.findOneByEmail(user.email);
     }
+
+
+    async logOut(){
+        return 'LogOut'
+    }
 }
