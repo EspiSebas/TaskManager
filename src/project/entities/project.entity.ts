@@ -23,7 +23,7 @@ export class Project {
         default:Status.PENDING
     })
     
-    status: Status;
+    state: Status;
 
 
     @DeleteDateColumn({ nullable: true })

@@ -55,11 +55,12 @@ export class ProjectService {
     return `This action returns a #${id} project`;
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(id: number, updateProjectDto: UpdateProjectDto) {
+     return await this.projectRepository.update(id,updateProjectDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+  async remove(id: number) {
+    const delet = await this.projectRepository.softDelete({id});
+    return 'Removed correctly';
   }
 }

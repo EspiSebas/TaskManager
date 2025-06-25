@@ -36,6 +36,13 @@ export class TaskManagerController {
     return this.taskManagerService.update(+id, updateTaskManagerDto);
   }
 
+  @Patch('comment/:id')
+  updateCommentAndState(@Param('id') id: string, @Body() updateTaskManagerDto: UpdateTaskManagerDto) {
+    return this.taskManagerService.updateCommentAndState(+id, updateTaskManagerDto);
+  }
+
+  
+
   
   @Delete(':id')
   @Auth(Roles.DEVELOPER)

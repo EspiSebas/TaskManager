@@ -16,6 +16,7 @@ export class UpdateTaskManagerDto {
     
         @IsOptional()
         state?: Status;
+        
 
         @IsOptional()
         comment?: string
