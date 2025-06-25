@@ -24,7 +24,7 @@ export class DashboardService {
   
     const taskActives =  await this.taskRepository.count({where:{state: Not(Status.COMPLETED)}});
     const taskFinished =  await this.taskRepository.count({where:{state: Status.COMPLETED}});
-    const projectActive = await this.projectRepository.count({ where:{ status: Not(Status.COMPLETED)}})
+    const projectActive = await this.projectRepository.count({ where:{ state: Not(Status.COMPLETED)}})
     const data = [
       { icon: '👷', label: 'Actives Tasks', value: taskActives },
       { icon: '📁', label: 'Actives Projects', value: projectActive },
